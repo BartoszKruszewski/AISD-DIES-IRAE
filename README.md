@@ -171,23 +171,46 @@ Algorytm ten nie zawsze zwraca rozwiązanie optymalne, a dla niektórych danych 
 
 ***Współczynnikiem równowagi*** węzła nazywamy różnicę między **wysokością** lewego i prawego poddrzewa tego węzła.
 
+![Drzewo AVL](/Materiały/Drzewo%20AVL.png)
 ## Obracanie poddrzew w drzewie AVL
-Aby zachować równowagę, drzewo AVL będzie się obracać w jeden z 4 sposobów:
+Aby zachować **równowagę** oraz **strukturę drzewa wyszukiwań binarnych**, drzewo AVL będzie się obracać w jeden z 4 sposobów:
 
 ### ***(Left Rotation)***
+Jeżeli po dodaniu węzła do prawego syna (C) prawego poddrzewa (B) drzewo jest niezbalansowane, wykonujemy rotację w **lewo**
+
+![Left Rotation](/Materiały/Drzewa%20AVL%20Left%20Rotation.png)
 
 ### ***(Right Rotation)***
+Jeżeli po dodaniu węzła do lewego syna (C) lewego poddrzewa (B) drzewo jest niezbalansowane, wykonujemy rotację w **prawo**
+
+![Right Rotation](/Materiały/Drzewa%20AVL%20Right%20Rotation.png) 
 
 ### ***(Left-Right Rotation)***
+Jeżeli po dodaniu węzła do prawego syna (B) lewego poddrzewa (A) drzewo jest niezbalansowane, wykonujemy wpierw obrót w **lewo**, a potem w **prawo**
+
+![Left right Rotation](/Materiały/Drzewa%20AVL%20Left-Right%20Rotation.png) 
 
 ### ***(Right-Left Rotation)***
+Jeżeli po dodaniu węzła do lewego syna (B) prawego poddrzewa (C) drzewo jest niezbalansowane, wykonujemy wpierw obrót w **prawo**, a potem w **lewo**
+
+![Right Left Rotation](/Materiały/drzewa%20AVL%20Right-Left%20Rotation.png)
+
+## Zalety drzew AVL
+1. **Wysokość drzewa** AVL jest zawsze **O(logn)**, gdzie n to liczba węzłów w drzewie. Dzięki temu operacje wyszukiwania, wstawiania i usuwania mają złożoność czasową **O(logn)**.
+1. Dzięki automatycznemu wyważaniu po każdej operacji **wstawiania** lub **usuwania**, drzewa AVL unikają najgorszego przypadku związanego z **drzewami binarnymi**, które mogą stać się **silnie niezrównoważone**.
+1. Rotacje wykorzystywane do balansowania drzewa są szybkie i efektywne.
+1. Drzewa AVL zawsze są zbalansowane, co oznacza, że zawwsze **współczynnik równowagi** jest nie większy niż 1. To ograniczenie gwarantuje, że operacje będą miały optymalną złożoność czasową.
 
 # Drzewa czerwono-czarne
 
 ## Opis problemu
 ***Drzewo Czerwono - Czarne*** to rodzaj **zrównoważonego drzewa wyszukiwań binarnych**, które wykorzystuje zestaw reguł do utrzymania równowagi, zapewniając **logarytmiczną** złożoność czasową dla operacji takich jak **insert**, **delete** i **find**, niezależnie od początkowego kształtu drzewa.
 
+![Drzewo czerwono-czarne](/Materiały/Drzewo%20czerwono-czarne.png)
+
 ***Drzewa Czerwono - Czarne*** balansują się wykorzystując prosty **schemat kodowania kolorami** w celu dostosowania drzewa po każdej modyfikacji.
+
+Intuicyjnie, można sobie wyobrazić drzewo czerwono-czarne jako drzewo, które jest **nieco bardziej elastyczne** w porównaniu do drzewa AVL, pozwalając na nieco większe odchylenia od idealnej równowagi, ale nadal **ograniczające te odchylenia** w sposób kontrolowany.
 
 ## Właściwości Drzew Czerwono - Czarncyh
 1. **Kolor węzła** : Każdy węzeł jest czerwony lub czarny .
@@ -196,7 +219,8 @@ Aby zachować równowagę, drzewo AVL będzie się obracać w jeden z 4 sposobó
 1. **Właściwość koloru czarnego** : każda ścieżka od węzła do potomnych węzłów zerowych (liście) ma tę samą liczbę czarnych węzłów.
 1. **Właściwość liścia** : Wszystkie liście (węzły NIL) są czarne.
 
-Te właściwości zapewniają, że **najdłuższa droga** od korzenia do dowolnego liścia nie jest dłuższa niż dwa razy dłuższa od najkrótszej ścieżki, zachowując równowagę drzewa i wydajną pracę.
+Te właściwości zapewniają, że **najdłuższa ścieżka** od korzenia do dowolnego liścia nie jest dłuższa niż dwukrotność najkrótszej ścieżki, zachowując równowagę drzewa i wydajną pracę.
+
 # B-drzewa
 
 # Drzewa Splay			
