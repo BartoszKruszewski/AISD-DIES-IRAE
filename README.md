@@ -419,6 +419,50 @@ Na opróżnienie zbioru A, potrzeba $\lceil n/2 \rceil$ porównań. Następnie p
 # Sortowania (głównie Quicksort)
 
 ## Izomorfizm drzew
+
+### Intuicja
+
+Dwa grafy są izomorficzne, jeżeli istnieje bijekcja (przeetykietowanie) wierzchołków jednego grafu w wierzchołki drugiego grafu, takie że jeżeli wierzchołki w pierwszym grafie łączyła krawędź to w drugim też będzie. Intuicyjnie oznacza to, że grafy mają taką strukturę, niezależną od wartości wierzchołków.
+
+### Izomorfizm grafów, a izomorfizm drzew
+
+Problem rozstrzygnięcia czy dwa grafy są izomorficzne jest w klasie NP, zatomiast nie wiadomo, czy jest NP-zupełny. Natomiast ograniczając się do wyłącznie do drzew problem izomorfizmu grafu można rozwiązać w czasie $O(n)$.
+
+### Algorytm AHU (Aho, Hopcroft, Ullman)
+
+Algorytm polega zakodowaniu drzew jako jednoznacznie definiujące ich strukturę ciągi nawiasów, a następnie porównanie czy ciągi są takie same.
+
+Enkodowanie dla poddrzewa to jego zakodowane poddrzewa, w posortowanej kolejności, żeby zachować jednoznaczność, otoczone nawiasami.
+
+```
+def encode(node):
+    if node is None:
+        return ""
+
+    labels = [encode(v) for v in node.children]
+    sort(labels)
+
+    return "(" + str(labels) + ")"
+```
+
+Dla drzew nieukorzenionych należy znaleźć ich wierzchołki centralne i dla nich wywołać enkodowanie.
+
+```
+def tree_isomorphism(T1, T2):
+    centers1 = tree_centers(T1)
+    centers2 = tree_centers(T2)
+
+    encoded1 = encode(centers1[0])
+
+    for center in centers2:
+        encoded2 = encode(center)
+        if encoded1 == encoded2:
+            return True
+    return False
+```
+
+Złożoność algorytmu jest równa $O(n * m * log(m))$, gdzie $n$ to liczba wierzchołków, a $m$ to arność drzewa. Wynika to stąd, że dla każdego wierzchołka wykonamy sortowanie ciągu o długości równej co najwyżej arności drzewa. Przyjmując $m$ jako stałą, złożoność algorytmu wynosi $O(n)$.
+
 ## Quicksort
 ## Counting sort
 ## Bucket sort
