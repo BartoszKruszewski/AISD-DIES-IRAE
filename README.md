@@ -559,7 +559,45 @@ Więc oczekiwany czas działania bucket-sorta to $\Theta(n)$.
 
 ## Radix sort
 
+Radix sort oznacza sortowanie leksykograficzne. Ciąg S jest wcześniejszy leksykograficznie od T, jeżeli S jest prefiksem T, lub jeżeli na pierwszej różniącej się pozycji ma wcześniejszy element względem ustalonego alfabetu.
 
+### Ciagi słów jednakowej długości
+
+Tutaj wystaczy stabilnie posortować elementy po każdym elemencie zaczynając od ostatniego.
+
+```
+def radix_sort(T):
+    for i = |T[0]| ... 0:
+        stable_sort(T, key = lambda A: A[i])
+```
+
+Używając Counting Sorta, złożoność tego algorytmu będzie wynosić $O((n + |\Sigma|) * d)$. Gdzie $|\Sigma|$ to wielkość alfabetu, natomiast $d$ to długość słów. Jeżeli potraktujemy $d$ jako stałą, a $|\Sigma| = O(n)$ to złożnośc algorytmu wyniesie $O(n)$.
+
+### Ciągi słów różnej długości
+
+Można zastosować uzupełnienie słów o pusty znak i wtedy posortować, natomiast taka metoda jest nieefektywna.
+
+Oznaczmy jako $l_i$ długość i-tego słowa. Wtedy:
+
+$l_{total} = \sum_{i = 1}^{n} l_i$
+
+Chcemy uzyskać algorytm, który ma złożoność $O(|\Sigma| + l_{total})$.
+
+```
+B[l] - zawiera wszystkie l-te litery słow uprządkowane niemalejąco
+S[l] - zawiera wszystkie slowa o długości l
+Q[a] - zawiera kolejkę słów, której l-tą literą jest a
+
+for l = lmax ... 1:
+    while S[l] != []:
+        slowo = S[l].pop()
+        Q[slowo[l]].push(slowo)
+    for a in B[l]:
+        res += Q[a]
+```
+
+Listę $B$ można utoworzyć poprzez radix_sort dla słów tej samej długośći dla listy par $<l, a>$, gdzie $a$ to l-ta litera jakiegoś słowa. Robimy to w czasie $O(l_{total})$.
+Utworzenie $S$ to policzenie liter i dodanie słów do odpowiedniego kubełka, czyli $O(l_{total})$. Pętla while wykona się proporcjonanie do ilości słów, a wewnętrzna pętla for proporcjonalnie do ilości liter. Czyli razem $O(l_{total})$.
 
 ## Izomorfizm drzew
 
