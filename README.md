@@ -26,3 +26,16 @@
 19. [Wyszukiwanie wzorca](/wyklad/20_wyszukiwanie_wzorca.md)
 20. [FFT](/wyklad/21_fft.md)
 21. [Van Emde Boas](/wyklad/22_van_emde_boas.md)
+
+# Zadania z ćwiczeń
+
+[Lista 0](/cwiczenia/cwiczenia_0.md)
+[Lista 1](/cwiczenia/cwiczenia_1.md)
+[Lista 2](/cwiczenia/cwiczenia_2.md)
+[Lista 3](/cwiczenia/cwiczenia_3.md)
+[Lista 4](/cwiczenia/cwiczenia_4.md)
+[Lista 5](/cwiczenia/cwiczenia_5.md)
+[Lista 6](/cwiczenia/cwiczenia_6.md)
+[Lista 7](/cwiczenia/cwiczenia_7.md)
+[Lista 8](/cwiczenia/cwiczenia_8.md)
+[Lista 9](/cwiczenia/cwiczenia_9.md)
