@@ -1,7 +1,47 @@
 # Programowanie dynamiczne
 
 ## Filozfia programowania dynamicznego
+
 ## Najtańsze przejście po tablicy 
+
+## Opis problemu 
+Problem Najtańszego Przejścia po Tablicy polega na znalezieniu ścieżki z pierwszej tablicy do ostatniej, której suma wartości jest minimalna. Możemy przemieszczać się jak na poniższym obrazku w każdym kroku. Podejście dynamiczne jest idealne do tego problemu, ponieważ możemy stopniowo obliczać minimalny koszt dotarcia do każdego pola, bazując na wcześniej obliczonych wartościach.
+
+![Możliwe ruchy](/src/Szukanie%20min%20ścieżki.png)
+
+## Podejście dynamiczne
+Definiujemy tablicę dp o wymiarach $$m*n$$, gdzie m i n to wymiary bazowej tablicy kosztów taką, że dp[i][j] określa koszt minimalnej ścieżki prowadzącej do komórki (i, j).
+
+```
+minPathSum(grid):
+    m = number of rows in grid
+    n = number of columns in grid
+
+    dp = array of size m x n
+
+    dp[0][0] = grid[0][0]
+    
+    for i from 1 to m-1:
+        dp[i][0] = dp[i-1][0] + grid[i][0]
+
+    for i from 1 to m-1:
+        for j from 1 to n-1:
+            dp[i][j] = min(dp[i-1][j-1], dp[i][j-1], dp[i+1][j-1]) + grid[i][j]
+
+    return dp
+```
+
+### Wyjaśnienie
+1. Inicjalizacja
+    - Tworzymy tablicę dp o tych samych wymiarach co grid, aby przechowywać **minimalne koszty dotarcia do każdego pola**.
+    - Koszt dotarcia do każdej komórki w pierwszej kolumnie to koszt tej komórki.
+
+1. Dla każdego pola (i, j), koszt dotarcia do niego to minimalny koszt dotarcia do jednego z następujących pól dp[i-1][j-1], dp[i][j-1] oraz dp[i+1][j-1] plus koszt wejścia na pole (i, j) czyli grid[i][j].
+
+### Analiza Złożoności
+- **Czasowa**: O(m×n), ponieważ każdy element tablicy grid jest odwiedzany dokładnie raz.
+- **Pamięciowa**: O(m×n) z powodu użycia tablicy dp o tych samych wymiarach co grid.
+
 ## LCS (Longest Common Subsequence)
 
 ### Opis problemu
@@ -40,6 +80,8 @@ LCS(X, Y):
 - **Pamięciowa**: $O(m*n)$ ze względu na tablicę dp.
 
 ## LIS (Longest Increasing Subsequnce)
+
+
 ## Problem plecakowy (Knapsack Problem)
 
 ### Opis problemu
@@ -66,9 +108,11 @@ knapsack(weights, values, W):
 ### Wyjaśnienie
 
 1. Tworzymy **tablicę dp** o rozmiarze **(n+1)×(W+1)**, gdzie n i m są długościami sekwencji X i Y, odpowiednio. Wszystkie elementy tablicy są **inicjalizowane na 0**.
+
 1. Iterujemy przez przedmioty (i od 1 do n) i przez możliwe pojemności plecaka (w od 0 do W). Dla każdego przedmiotu i pojemności, **sprawdzamy, czy możemy dodać dany przedmiot do plecaka**. 
     - Jeśli tak, ustawiamy wartość w tabeli jako maksymalną wartość między **wartością bez dodawania przedmiotu a wartością z dodaniem przedmiotu**.
     - w przeciwnym przypadku ustawiamy wartość na tą **bez dodania tego przedmiotu**.
+    
 1. Maksymalna wartość, jaką można uzyskać, znajduje się w **dp[n][W]**.
 
 ### Analiza:
@@ -76,7 +120,9 @@ knapsack(weights, values, W):
 - **Pamięciowa**: O(n×W) ze względu na tablicę DP.
 
 ## Problem sumy podzbiorów (Subset Sum Problem)
+
 ## Problem wyznaczania optymalnej kolejności mnożenia macierzy (Matrix Chain Multiplication Problem) 
+
 ## Algorytm Forda-Bellmana
 
 ### Opis problemu
