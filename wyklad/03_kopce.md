@@ -21,9 +21,9 @@ def przesuń-niżej(K, i):
     do:
         # zamiana j-tego elementu z większym dzieckiem
         j = k
-        if 2j <= n and K[2j] > K:
+        if 2j <= n and K[2j] > K[k]:
             k = 2j
-        if 2j < n and K[2j + 1] > K:
+        if 2j < n and K[2j + 1] > K[k]:
             k = 2j + 1
         swap(K[j], K[k])
     while j != k
