@@ -51,3 +51,7 @@ W podstawowej implementacji, należy przeszukać korzenie wszystkich drzew, poni
 ### Delete-min
 
 Wykonujemy Findmin. Następnie usuwamy element. Dzieci usunięte wierzchołka to drzewa dwumianowe. Tworzymy kopiec dwumianowy zawierający te drzewa i wykonujemy Union. Złożoność to $O(log(n) + log(n)) = O(log(n))$
+
+## Implementacja leniwa
+
+W tej implementacji po wykonaniu Insert oraz Union tracimy strukturę kopca dwumianowego, ale operacje są wykonywane bez "dodawania binarnego" drzew. Przez to mają koszt $O(1)$. Struktutra kopca dwumianowego zostaje dopiero przywrócona przy wykonaniu operacji $Delete-min$. Może ona mieć opesymistyczny koszt $O(n)$, natomiast przy analizie zamortyzowanej koszt to $O(log(n))$.
