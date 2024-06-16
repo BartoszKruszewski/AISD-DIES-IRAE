@@ -53,6 +53,6 @@ $n * (log(n) + log(n)) = 2nlog(n) = O(nlog(n))$
 
 Kopiec świetnie nadaje się do realizowania operacji kolejki priorytetowej:
 
-- insert $O(1)$
-- find-min $O(log(n))$
+- find-min $O(1)$
+- insert $O(log(n))$
 - delete-min $O(log(n))$
