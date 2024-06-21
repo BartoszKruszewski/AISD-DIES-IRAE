@@ -26,18 +26,37 @@ Podczas operacji insert wstawiamy wierzchołek jak do standardowego BST w czasie
 
 1. Wujek wierzchołka jest czerwony
 
-Dziadka kolorujemy na czerowono (bo był czarny), a wujka i ojca na czarno.
+Dziadka kolorujemy na czerowono (bo był czarny), a wujka i ojca na czarno. Następną rotację wywołyjemy dla dziadka wierzchołka.
+
+```
+z.p.p.color = RED
+z.p.p.r.color = BLACK
+z.p = color = BLACK
+z = z.p.p
+```
 
 2. Wujek wierzchołka jest czarny (wierzchołek jest prawym synem swojego ojca)
 
-Robimy rotacje wierzchołka w lewo.
+Robimy rotacje ojca w lewo.
 Otrzymujemy wtedy przypadek 3 dla byłego ojca wierzchołka.
+
+```
+z = z.p
+rotate-left(z)
+```
 
 3. Wujek wierzchołka jest czarny (wierzchołek jest lewym synem swojego ojca)
 
-Dziadka malujemy na czerwono, ojca na czarno i robimy rotacje ojca w prawo.
+Dziadka malujemy na czerwono, ojca na czarno i robimy rotacje dziadka w prawo.
 
-Wykonujemy operacje zależne od którejść z tych sytuacji.
-Następnie wykonujemy to samo dla wierzchołka, na ścieżce do korzenia, który narusza własności drzewa. Przenosimy zaburzenie do dziadka aktualnie sprawdzanego wierzchołka.
+```
+z.p.p.color = RED
+z.p = BLACK
+rotate-right(z.p.p)
+```
+
+Wykonujemy operacje aż dojdziemy do korzenia.
+
+## Złożoność
 
 Maksymalnie wykonamy operacje naprawiania porządku dla wierzchołków na ścieżce. Wykonujemy je w czasie stałym, więc złożoność całego inserta to $O(log(n))$.
