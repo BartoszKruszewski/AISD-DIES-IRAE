@@ -97,37 +97,24 @@ Problem plecakowy polega na **maksymalizacji wartości** przedmiotów umieszczon
 
 ### Podejście dynamiczne
 
-Tworzymy tabelę dp[i][w], w której każdy element reprezentuje maksymalną wartość, jaką można uzyskać, mając plecak o pojemności w i rozważając i pierwszych przedmiotów.
+Tworzymy tabelę dp[w], w której każdy element reprezentuje maksymalną wartość, jaką można uzyskać, mając plecak o pojemności w.
+Zauważmy, że dla każej pojemnośći w jakieś ułożenie będzie maksymalne, oraz że takie ułożenie po wyciągnięciu jednego elementu, będzie maksymalne dla pojemności w pomniejszonej o wage wyciagnietego elementu. Wystarczy dla każdej wagi sprawdzić jaki to będzie element i wziąć maksymalną osiąganą wteyd wartość.
 
 ```
-knapsack(weights, values, W):
+def knapsack(weights, values, W):
     n = length(weights)
+    dp = [0] * W
 
-    dp = array of size (n+1)x(W+1) initialized to 0
+    for w = 1 ... W:
+        for i = 0 ... n:
+            if weight[i] <= w:
+                dp[w] = max(dp[w], dp[w - weights[i]] + values[i])
 
-    for i from 1 to n:
-        for w from 0 to W:
-            if weights[i-1] <= w:
-                dp[i][w] = max(dp[i-1][w], dp[i-1][w-weights[i-1]] + values[i-1])
-            else:
-                dp[i][w] = dp[i-1][w]
+    return dp[W]
 
-    return dp[n][W]
 ```
 
-### Wyjaśnienie
-
-1. Tworzymy **tablicę dp** o rozmiarze **(n+1)×(W+1)**, gdzie n i m są długościami sekwencji X i Y, odpowiednio. Wszystkie elementy tablicy są **inicjalizowane na 0**.
-
-1. Iterujemy przez przedmioty (i od 1 do n) i przez możliwe pojemności plecaka (w od 0 do W). Dla każdego przedmiotu i pojemności, **sprawdzamy, czy możemy dodać dany przedmiot do plecaka**.
-   - Jeśli tak, ustawiamy wartość w tabeli jako maksymalną wartość między **wartością bez dodawania przedmiotu a wartością z dodaniem przedmiotu**.
-   - w przeciwnym przypadku ustawiamy wartość na tą **bez dodania tego przedmiotu**.
-1. Maksymalna wartość, jaką można uzyskać, znajduje się w **dp[n][W]**.
-
-### Analiza:
-
-- **Czasowa**: O(n×W), gdzie n to liczba przedmiotów, a W to pojemność plecaka.
-- **Pamięciowa**: O(n×W) ze względu na tablicę DP.
+Złożoność to $O(nW)$. Zauważmy, że jest to złożoność pseudowielomianowa, ponieważ W nie jest wartość opisującą wielkość danych wejściowych.
 
 ## Problem sumy podzbiorów (Subset Sum Problem)
 
