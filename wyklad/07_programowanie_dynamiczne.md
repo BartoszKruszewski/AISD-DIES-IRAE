@@ -116,6 +116,28 @@ def knapsack(weights, values, W):
 
 Złożoność to $O(nW)$. Zauważmy, że jest to złożoność pseudowielomianowa, ponieważ W nie jest wartość opisującą wielkość danych wejściowych.
 
+### Wersja bez powtórzeń
+
+Powyższy algorytm uzględnia możliwość powtarzania się przedmiotów. Dla wersji bez powtórzeń należy zastosować podobne podejście z lekką modyfikacją:
+
+dp[w][i] - maksymalna wartość przedmiotów z przedziału $0 \dots i$ dla pojemności plecaka $w$
+
+Musimy sprawdzić czy opłaca się dodać i-ty, czy nie.
+
+```
+def knapsack(weights, values, W):
+    n = length(weights)
+    dp = [W] x [n]
+
+    for w = 1 ... W:
+        for i = 0 ... n:
+            if weight[i] <= w:
+                dp[w][i] = max(dp[w][i], dp[w - weights[i]][i - 1] + values[i], dp[w][i - 1])
+
+    return dp[W]
+
+```
+
 ## Problem sumy podzbiorów (Subset Sum Problem)
 
 ## Problem wyznaczania optymalnej kolejności mnożenia macierzy (Matrix Chain Multiplication Problem)
@@ -236,3 +258,10 @@ floydWarshall(graph):
 ## Drzewa rozpinające drabin
 
 ## Problemy NP(NP-trudność, NP-zupełność, redukcje)
+
+- $P$: problemy, które można rozwiązać w czasie wielomianowym ($O(n^{O(1)}))
+- $NP$: problemy decyzyjne (odpowiedź to TAK lub NIE), których poprawność rozwiązania (można zgadnąć rozwiązanie i sprawdzić czy jest poprawne) można sprawdzić w czasie wielomianowym
+- $NP-trudne$: problemy, do których redukują się wszystkie problemy NP (jest conajmniej tak trudny jak każdy problem z klasy NP)
+- $NP-zupełne$: problemy, które są jednocześnie $NP$ oraz $NP-trudne$
+
+![klasy złożonośći](/src/07_01.png)
